@@ -52,6 +52,7 @@ fun MyLogin(
 
     val colorGrisOscuro by remember { mutableStateOf(Color(0xFF18181C)) }
     val colorNarangita by remember { mutableStateOf(Color(0xFFE88700)) }
+    var user by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
 
     Column(modifier = modifier.fillMaxSize()) {
@@ -98,7 +99,9 @@ fun MyLogin(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                CampoUsuario(colorNarangita)
+                CampoUsuario(colorNarangita,user){
+                    user = it
+                }
                 CampoContrasena(colorNarangita,pass){
                     pass = it
                 }
@@ -111,10 +114,14 @@ fun MyLogin(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CampoUsuario(colorDeLinea:Color){
+fun CampoUsuario(
+    colorDeLinea:Color,
+    text:String,
+    onValueChange: (String)->Unit
+){
     TextField(
-        value = "",
-        onValueChange = {},
+        value = text,
+        onValueChange = {onValueChange(it)},
         label = { Text("Usuario") },
         singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -137,10 +144,10 @@ fun CampoUsuario(colorDeLinea:Color){
 fun CampoContrasena(
     colorDeLinea:Color,
     text:String,
-    onValueChange: (String)->Unit ){
+    onValueChange: (String)->Unit
+){
 
     var isPasswordVisible by remember { mutableStateOf(false) }
-
     val trailingIcon = @Composable {
         IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
             Icon(
