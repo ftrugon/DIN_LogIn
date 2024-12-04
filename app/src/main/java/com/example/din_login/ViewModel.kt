@@ -26,6 +26,12 @@ class ViewModel() {
         _pass.value = newValue
     }
 
+    fun resetUserAndPass(){
+        _pass.value = ""
+        _user.value = ""
+        _canLogIn.value = false
+    }
+
     fun comporbarLogin(){
         _canLogIn.value = validateMail() && validatePass()
     }

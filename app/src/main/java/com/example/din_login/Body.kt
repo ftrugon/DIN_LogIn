@@ -47,7 +47,8 @@ fun Body(
     userText:String,
     onChangeUser:(String) -> Unit,
     passText:String,
-    onPassChange:(String) -> Unit
+    onPassChange:(String) -> Unit,
+    onPressButton:()-> Unit
 ){
 
 
@@ -74,7 +75,6 @@ fun Body(
         // campos del login y los textos que hay abajo
         Column(
             modifier = Modifier
-                //.fillMaxSize()
                 .padding(top = 25.dp, start = 16.dp, end = 16.dp, bottom = 10.dp)
                 .background(colorGrisOscuro),
             verticalArrangement = Arrangement.Center,
@@ -128,7 +128,7 @@ fun Body(
         }
 
         // se explica solo
-        LogInButton(canLogIn)
+        LogInButton(canLogIn) { onPressButton() }
 
 
         // boton de iniciar sesion con google
@@ -175,13 +175,13 @@ fun Body(
 
 // funcion del boton del login
 @Composable
-fun LogInButton(canLogIn:Boolean){
+fun LogInButton(canLogIn:Boolean,onPressButton:()->Unit){
     val colorBoton = if (canLogIn) colorNarangita else Color.Black
     val colorBordeBoton = if (canLogIn) colorNarangita else Color(0xFF3D3D3D)
     val colorTextBoton = if (canLogIn) Color.White else Color(0xFF3D3D3D)
 
     Button(
-        onClick = {  },
+        onClick = { onPressButton() },
         shape = RoundedCornerShape(0.dp),
         enabled = canLogIn,
         colors = ButtonDefaults.buttonColors(

@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun Footer(modifier: Modifier) {
 
+
+    // todos los textos van a tener el mismo estilo asi que lo pongo aqui
     val estiloTexto = TextStyle(
         color = Color.White,
         fontSize = 14.sp,
